@@ -1,13 +1,16 @@
 import { useState } from 'react'
 import './App.css'
-import { Test } from './Components/Test'
+import { Post } from './Components/Post/Post.jsx';
+import { Search } from './Components/Search/Search.jsx';
 
 function App() {
   const [changeInput, setChangeInput] = useState("")
-  const helloMsg= 'Hello';
-
+  console.log(changeInput)
   return (
-      <Test helloMsg={helloMsg} changeInput={changeInput} setChangeInput={setChangeInput}/>
+    <div>
+      <Search changeInput={changeInput} setChangeInput={setChangeInput} />
+      <Post />
+    </div>
   )
 }
 
