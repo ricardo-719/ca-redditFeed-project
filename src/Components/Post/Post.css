@@ -6,6 +6,30 @@ html {
 }
 
 .postItem {
-    border: 1px solid white;
+    display: flex;
+    border-bottom: 1px solid white;
     border-radius: 0.3rem;
+    width: 70%;
+    margin: 1% auto;
+}
+
+.voteCount {
+    display: inline-block;
+    height: 100%;
+    width: 15%;
+    align-self: center;
+}
+
+.postSummary {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 85%;
+}
+
+.postAuthor {
+    display: inline-block;
+    font-style: italic;
+    font-size: 0.8rem;
+    align-self: self-start;
 }
