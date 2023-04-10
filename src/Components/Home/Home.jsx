@@ -12,7 +12,6 @@ export function Home() {
   const [isError, setIsError] = useState(false);
 
 // Fetch data from reddit
-  
   const fetchData = async() => {
     setIsLoading(true);
     try {
