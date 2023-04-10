@@ -1,19 +1,19 @@
 import './Post.css'
 
-export const Post = (props) => {
+export const Post = ({ post }) => {
 
-  const { post } = props;
+  //Format image links and posts title
+ const img = post.preview && post.preview.images[0] && post.preview.images[0].source && post.preview.images[0].source.url.replace(/&amp;/g, '&');
+ const formatTitle = post.title.replace(/&amp;/g, '&')
     
   return (
     <section className="postItem">
         <span className='voteCount' >{post.ups}</span>
         <div className='postSummary'>
           <span className='postAuthor'>Posted by {post.author}</span>
-          <h3>{ post.title }</h3>
-          <p>Preview goes here</p>
+          <h3>{ formatTitle }</h3>
+          { img ? (<img style={{maxWidth: '250px'}} src={ img } alt={ post.title } />) : (<p></p>) }
         </div>
     </section>
   )
 }
-
-//preview.images[0].source.url (But not all post contain images. A conditional must be put in place to avoid undefined issues)
