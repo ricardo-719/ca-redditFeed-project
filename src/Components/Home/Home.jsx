@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState,useCallback } from 'react'
 import './Home.css'
 import { Post } from '../Post/Post.jsx';
 import { Search } from '../Search/Search.jsx';
@@ -12,7 +12,7 @@ export function Home() {
   const [isError, setIsError] = useState(false);
 
 // Fetch data from reddit
-  const fetchData = async(endpoint) => {
+  const fetchData = useCallback(async(endpoint) => {
     setIsLoading(true);
     try {
       const response = await fetch(`https://www.reddit.com/r/${endpoint}.json`);
@@ -25,7 +25,7 @@ export function Home() {
       setIsLoading(false);
       setIsError(true);
     }
-  }
+  } ,[])
 
   useEffect(() => {
     fetchData(subReddit);
