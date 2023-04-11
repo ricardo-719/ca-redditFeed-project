@@ -4,6 +4,8 @@ export const Post = ({ post }) => {
 
   //Format image links and posts title
  const img = post.preview && post.preview.images[0] && post.preview.images[0].source && post.preview.images[0].source.url.replace(/&amp;/g, '&');
+ /* const img = post.preview?.images[0]?.souce?.url.replace(/&amp;/g, '&') || ""; */
+ console.log(img)
  const formatTitle = post.title.replace(/&amp;/g, '&')
     
   return (

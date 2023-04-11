@@ -1,17 +1,25 @@
+import { useState } from 'react';
+
 export const Search = (props) => {
 
-    const { searchInput, setSearchInput } = props
+    const { setSubReddit } = props
+
+    const [searchInput, setSearchInput] = useState("");
 
     const handleOnChange = (e) => {
-        console.log(e.target.value);
         setSearchInput(e.target.value);
+    }
+
+    const handleOnClick = () => {
+      console.log(searchInput)
+      setSubReddit(searchInput);
     }
 
   return (
     <section>
-        <label htmlFor="searchBar">Search:</label>
-        <input id="searchBar" name="searchBar" type="text" onChange={handleOnChange}/>
-        <p>{searchInput}</p>
+      <label htmlFor="searchBar">Search:</label>
+      <input id="searchBar" name="searchBar" type="text" onChange={handleOnChange}/>
+      <button onClick={handleOnClick} >Search</button>
     </section>
   )
 }

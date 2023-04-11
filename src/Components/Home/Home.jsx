@@ -2,20 +2,20 @@ import { useEffect, useState } from 'react'
 import './Home.css'
 import { Post } from '../Post/Post.jsx';
 import { Search } from '../Search/Search.jsx';
+import Header from '../Header/Header';
 
 export function Home() {
 
-  const [searchInput, setSearchInput] = useState("");
   const [posts, setPosts] = useState("");
-  const [subReddit, setSubReddit] = useState('Codecademy');
+  const [subReddit, setSubReddit] = useState('popular');
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
 
 // Fetch data from reddit
-  const fetchData = async() => {
+  const fetchData = async(endpoint) => {
     setIsLoading(true);
     try {
-      const response = await fetch(`https://www.reddit.com/r/${subReddit}.json`);
+      const response = await fetch(`https://www.reddit.com/r/${endpoint}.json`);
       if (response.ok) {
         const jsonResponse = await response.json();
         setPosts(jsonResponse.data.children);
@@ -28,8 +28,8 @@ export function Home() {
   }
 
   useEffect(() => {
-    fetchData();
-  }, [])
+    fetchData(subReddit);
+  }, [subReddit])
 
   useEffect(() => {
     if (posts) {
@@ -52,14 +52,15 @@ else if (isError) {
 }
 else {
   return (
-    <div>
-      <Search searchInput={searchInput} setsearchInput={setSearchInput} />
+    <main>
+      <Header subReddit={subReddit} />
+      <Search setSubReddit={setSubReddit} />
       <div className='posts'>
         {
           (posts != null) ? posts.map((post) => <Post key={post.data.id} post={post.data} />) : ''
         }
       </div> 
-    </div>
+    </main>
   )
 }
 }

@@ -1,0 +1,9 @@
+.homeHeader {
+    display: flex;
+    align-items: center;
+    background-color: RGBA(255, 67, 0, 0.4);
+    margin-top: 0;
+    padding-left: 2%;
+    height: 8rem;
+    width: 100%;
+}

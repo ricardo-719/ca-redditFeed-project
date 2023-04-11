@@ -7,10 +7,12 @@ html {
 
 .postItem {
     display: flex;
+    justify-content: center;
     border-bottom: 1px solid white;
     border-radius: 0.3rem;
     width: 70%;
     margin: 1% auto;
+    padding-bottom: 1%;
 }
 
 .voteCount {
