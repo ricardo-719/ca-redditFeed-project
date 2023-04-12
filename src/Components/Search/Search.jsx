@@ -1,18 +1,18 @@
-import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchPosts, updateInput } from '../../features/fetchSlice';
 
-export const Search = (props) => {
+export const Search = () => {
 
-    const { setSubReddit } = props
+    const dispatch = useDispatch()
 
-    const [searchInput, setSearchInput] = useState("");
+    const { searchInput } = useSelector((state) => state.fetch)
 
     const handleOnChange = (e) => {
-        setSearchInput(e.target.value);
+        dispatch(updateInput(e.target.value));
     }
 
     const handleOnClick = () => {
-      console.log(searchInput)
-      setSubReddit(searchInput);
+      dispatch(fetchPosts(searchInput));
     }
 
   return (

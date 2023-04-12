@@ -3,13 +3,16 @@ import './Home.css'
 import { Post } from '../Post/Post.jsx';
 import { Search } from '../Search/Search.jsx';
 import Header from '../Header/Header';
+import { useSelector } from 'react-redux';
 
 export function Home() {
 
   const [posts, setPosts] = useState("");
-  const [subReddit, setSubReddit] = useState('popular');
+  /* const [subReddit, setSubReddit] = useState('popular'); */
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
+  const { subReddit } = useSelector((state) => state.fetch)
+  /* const { posts, subReddit, isLoading, isError } = useSelector((state) => state.fetch) */
 
 // Fetch data from reddit
   const fetchData = useCallback(async(endpoint) => {
@@ -54,7 +57,7 @@ else {
   return (
     <main>
       <Header subReddit={subReddit} />
-      <Search setSubReddit={setSubReddit} />
+      <Search />
       <div className='posts'>
         {
           (posts != null) ? posts.map((post) => <Post key={post.data.id} post={post.data} />) : ''
