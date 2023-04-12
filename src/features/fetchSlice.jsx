@@ -1,4 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { getPostData } from '../API/apiCall';
+
 
 export const fetchSlice = createSlice({
     name: 'fetch',
@@ -14,15 +16,34 @@ export const fetchSlice = createSlice({
             if (action.payload){
                 state.subReddit = action.payload
             } else {
-                return state.subReddit
+                return state
             }
             
+        },
+        definePost: (state, action) => {
+            state.posts = action.payload
         },
         updateInput: (state, action) => {
             state.searchInput = action.payload
         }
+    },
+    extraReducers: (builder) => {
+        builder
+        .addCase(getPostData.pending, (state) => {
+            state.isLoading = true;
+            state.isError = false;
+        })
+        .addCase(getPostData.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.isError = false;
+            state.posts = action.payload
+        })
+        .addCase(getPostData.rejected, (state) => {
+            state.isLoading = false;
+            state.isError = true;
+        })
     }
 })
 
-export const { fetchPosts, updateInput } = fetchSlice.actions
+export const { fetchPosts, definePost, updateInput } = fetchSlice.actions
 export default fetchSlice.reducer

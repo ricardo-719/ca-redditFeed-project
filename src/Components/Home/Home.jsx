@@ -1,21 +1,23 @@
-import { useEffect, useState,useCallback } from 'react'
+import { useEffect } from 'react'
 import './Home.css'
 import { Post } from '../Post/Post.jsx';
 import { Search } from '../Search/Search.jsx';
 import Header from '../Header/Header';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { getPostData } from '../../API/apiCall';
 
 export function Home() {
 
-  const [posts, setPosts] = useState("");
+ /*  const [posts, setPosts] = useState(""); */
   /* const [subReddit, setSubReddit] = useState('popular'); */
-  const [isLoading, setIsLoading] = useState(true);
-  const [isError, setIsError] = useState(false);
-  const { subReddit } = useSelector((state) => state.fetch)
+/*   const [isLoading, setIsLoading] = useState(true); */
+  /* const [isError, setIsError] = useState(false); */
+  const { subReddit, posts, isLoading, isError } = useSelector((state) => state.fetch)
+  const dispatch = useDispatch();
   /* const { posts, subReddit, isLoading, isError } = useSelector((state) => state.fetch) */
 
 // Fetch data from reddit
-  const fetchData = useCallback(async(endpoint) => {
+/*   const fetchData = useCallback(async(endpoint) => {
     setIsLoading(true);
     try {
       const response = await fetch(`https://www.reddit.com/r/${endpoint}.json`);
@@ -28,20 +30,22 @@ export function Home() {
       setIsLoading(false);
       setIsError(true);
     }
-  } ,[])
+  } ,[]) */
 
   useEffect(() => {
-    fetchData(subReddit);
+    /* fetchData(subReddit); */
+    dispatch(getPostData(subReddit))
   }, [subReddit])
 
-  useEffect(() => {
+  /* useEffect(() => {
     if (posts) {
       setIsLoading(false)
     } else {
       setIsLoading(true)
     }
-  }, [posts])
-
+  }, [posts]) */
+console.log(isLoading);
+console.log(posts)
 if (isLoading) {
   return <h2>Loading...</h2>
 } 
