@@ -33,15 +33,14 @@ export function Home() {
   }
   else {
     return (
-      <main>
-        <Header subReddit={subReddit} />
+      <section>
         <Search />
         <div className='posts'>
           {
             (posts != null) ? posts.map((post) => <Post key={post.data.id} post={post.data} />) : ''
           }
         </div> 
-      </main>
+      </section>
     )
   }
 }

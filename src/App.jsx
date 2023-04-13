@@ -1,13 +1,19 @@
 import './App.css'
-import { Home } from './Components'
+import { Home, Header, Subreddits } from './Components'
 
 function App() {
 
   return (
-    <div>
-      <Home />
-    </div>
-  )
+    <>
+      <Header />
+      <main>
+        <Home />
+      </main>
+      <aside>
+        <Subreddits />
+      </aside>
+    </>
+  );
 }
 
 export default App
