@@ -1,14 +1,14 @@
 import { useEffect } from 'react'
 import './Home.css'
 import { Post } from '../Post/Post.jsx';
+import { Subreddits } from '../Subreddits/Subreddits';
 import { Search } from '../Search/Search.jsx';
-import Header from '../Header/Header';
 import { useSelector, useDispatch } from 'react-redux';
-import { getPostData } from '../../API/apiCall';
+import { getPostData, getSubredditsData } from '../../API/apiCall';
 
 export function Home() {
 
-  const { subReddit, posts, isLoading, isError } = useSelector((state) => state.fetch)
+  const { subReddit, posts, subReddits, isLoading, isError, subIsLoading, subIsError } = useSelector((state) => state.fetch)
   const dispatch = useDispatch();
 
 
@@ -16,14 +16,20 @@ export function Home() {
     dispatch(getPostData(subReddit))
   }, [subReddit])
 
+  useEffect(() => {
+    dispatch(getSubredditsData())
+  }, [])
+
   const handleClick = () => {
     dispatch(getPostData(subReddit))
   }
 
-  if (isLoading) {
+  console.log(subReddits)
+
+  if (isLoading || subIsLoading) {
     return <h2>Loading...</h2>
   } 
-  else if (isError) {
+  else if (isError || subIsError) {
     return (
       <section>
         <h2>Failed to load...</h2>
@@ -33,14 +39,23 @@ export function Home() {
   }
   else {
     return (
-      <section>
-        <Search />
-        <div className='posts'>
+      <div className='homeComponent'>
+        <section className='postSection'>
+          <Search />
+          <div className='posts'>
+            {
+              (posts != null) ? posts.map((post) => <Post key={post.data.id} post={post.data} />) : ''
+            }
+          </div> 
+        </section>
+        <aside>
+          <h3>Interesting Subs</h3>
           {
-            (posts != null) ? posts.map((post) => <Post key={post.data.id} post={post.data} />) : ''
+            (subReddits != null) ? subReddits.map((sub) => <Subreddits key={sub.data.id} sub={sub.data} />) : ''
           }
-        </div> 
-      </section>
+        </aside>
+      </div>
+      
     )
   }
 }

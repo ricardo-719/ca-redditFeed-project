@@ -1,18 +1,17 @@
 import './App.css'
-import { Home, Header, Subreddits } from './Components'
+import { Home, Header } from './Components'
 
 function App() {
 
   return (
-    <>
-      <Header />
+    <div className='components'>
+      <header>
+        <Header />
+      </header>
       <main>
-        <Home />
+        <Home /> 
       </main>
-      <aside>
-        <Subreddits />
-      </aside>
-    </>
+    </div>
   );
 }
 

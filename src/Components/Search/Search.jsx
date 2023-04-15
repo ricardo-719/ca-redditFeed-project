@@ -17,9 +17,9 @@ export const Search = () => {
 
   return (
     <section>
-      <label htmlFor="searchBar">Search:</label>
+      <label htmlFor="searchBar">Subreddit: </label>
       <input id="searchBar" name="searchBar" type="text" onChange={handleOnChange}/>
-      <button onClick={handleOnClick} >Search</button>
+      <button onClick={handleOnClick} style={{marginLeft: "0.5rem"}}>Go</button>
     </section>
   )
 }

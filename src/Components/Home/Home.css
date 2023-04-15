@@ -1,5 +1,18 @@
-main {
+.postSection {
     display: flex;
     flex-direction: column;
     width: 100%;
+}
+
+.homeComponent {
+    display: flex;
+    justify-content: space-around;
+}
+
+aside {
+    height: fit-content;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 1rem;
+    padding: 0 1rem 1rem;
+
 }

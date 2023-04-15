@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getPostData } from '../API/apiCall';
+import { getPostData, getSubredditsData } from '../API/apiCall';
 
 
 export const fetchSlice = createSlice({
@@ -7,8 +7,11 @@ export const fetchSlice = createSlice({
     initialState: {
         posts: "",
         subReddit: 'popular',
+        subReddits: '',
         isLoading: true,
         isError: false,
+        subIsLoading: true,
+        subIsError: false,
         searchInput: ""
     },
     reducers: {
@@ -41,6 +44,19 @@ export const fetchSlice = createSlice({
         .addCase(getPostData.rejected, (state) => {
             state.isLoading = false;
             state.isError = true;
+        })
+        .addCase (getSubredditsData.pending, (state) => {
+            state.subIsLoading = true;
+            state.subIsError = false;
+        })
+        .addCase(getSubredditsData.fulfilled, (state, action) => {
+            state.subIsLoading = false;
+            state.subIsError = false;
+            state.subReddits = action.payload
+        })
+        .addCase(getSubredditsData.rejected, (state) => {
+            state.subIsLoading = false;
+            state.subIsError = true;
         })
     }
 })
